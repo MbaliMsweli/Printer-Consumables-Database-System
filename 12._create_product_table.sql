@@ -15,3 +15,4 @@ BEGIN
         Warranty VARCHAR(100)
     );
 END
+
