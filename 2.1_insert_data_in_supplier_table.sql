@@ -1,13 +1,12 @@
-INSERT INTO [SandavTonerDB].[dbo].[Supplier]
-(SupplierName, Email, Phone, Province, City, Country, YearsInBusiness)
+INSERT INTO Supplier (SupplierName, SupplierEmail, SupplierPhone, SupplierProvince, SupplierCity, SupplierCountry, SupplierYearsInBusiness)
 VALUES
-('TechSource Supplies','info@techsource.com','0711111111','Gauteng','Johannesburg','South Africa',8),
-('PrintPro Distributors','sales@printpro.com','0722222222','Gauteng','Pretoria','South Africa',12),
-('OfficeGear Ltd','contact@officegear.com','0733333333','Western Cape','Cape Town','South Africa',6),
-('MegaPrint Africa','support@megaprint.co.za','0744444444','KwaZulu-Natal','Durban','South Africa',10),
-('FastInk Suppliers','orders@fastink.com','0755555555','Limpopo','Polokwane','South Africa',5),
-('Smart Office Solutions','hello@smartoffice.com','0766666666','Mpumalanga','Nelspruit','South Africa',9),
-('Elite Toners','info@elitetoners.com','0777777777','Free State','Bloemfontein','South Africa',7),
-('QuickPrint Supplies','sales@quickprint.com','0788888888','Northern Cape','Kimberley','South Africa',4),
-('National Office Mart','contact@nom.co.za','0799999999','Eastern Cape','East London','South Africa',15),
-('UltraPrint Systems','support@ultraprint.com','0700000000','North West','Rustenburg','South Africa',11);
+('TechSource Supplies','sales@techsource.co.za','+27 12 348 1101','Gauteng','Pretoria','South Africa',12),
+('PrintPro Distributors','info@printpro.co.za','+27 11 998 7765','Gauteng','Johannesburg','South Africa',9),
+('Cape Office Solutions','orders@capeoffice.co.za','+27 21 556 9001','Western Cape','Cape Town','South Africa',15),
+('KZN Cartridge Co','support@kzncartridge.co.za','+27 31 201 7788','KZN','Durban','South Africa',8),
+('FreeState Office Mart','sales@fsom.co.za','+27 51 430 9900','Free State','Bloemfontein','South Africa',10),
+('Limpopo IT Supplies','info@limpoits.co.za','+27 15 295 4432','Limpopo','Polokwane','South Africa',7),
+('Mpuma Print Solutions','orders@mpumaprint.co.za','+27 13 755 3322','Mpumalanga','Nelspruit','South Africa',11),
+('NorthWest Stationers','sales@nwstationers.co.za','+27 14 592 7744','North West','Rustenburg','South Africa',6),
+('Eastern Cape Office','support@ecoffice.co.za','+27 43 721 8822','Eastern Cape','East London','South Africa',9),
+('Northern Cape Tech','info@nctech.co.za','+27 53 831 4401','Northern Cape','Kimberley','South Africa',14);
