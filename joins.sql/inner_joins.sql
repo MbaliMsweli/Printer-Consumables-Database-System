@@ -73,4 +73,4 @@ INNER JOIN Customer as c
 ON co.CustomerID = c.CustomerID
 WHERE co.CustomerOrderStatus = 'Pending';
 
-SELECT* FROM CustomersWithPendingOrde
+SELECT* FROM CustomersWithPendingOrder;
