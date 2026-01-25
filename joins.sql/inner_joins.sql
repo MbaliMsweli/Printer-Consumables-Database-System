@@ -31,9 +31,6 @@ SELECT * FROM [dbo].[CompanyOrderItem]
 SELECT* FROM [dbo].[Supplier]
 
 ----checking order status for the orders that the company placed from the supplier and the total paid for the quantity that was ordered
-SELECT * FROM [dbo].[CompanyOrder];
-
-SELECT * FROM [dbo].[CompanyOrderItem]
 
 CREATE VIEW CompanyOrderStatus_TotalPaid AS
 SELECT 
@@ -53,17 +50,17 @@ co.OrderStatus,
 co.OrderDate,
 coi.Quantity;
 
+---quering the view 
 SELECT * FROM CompanyOrderStatus_TotalPaid;
 
-SELECT * FROM CompanyOrder_TotalPaid;
 
-SELECT * FROM CompanyOrder_TotalPaid;
-
+----selecting tables I will need to create my view
 SELECT* FROM [dbo].[Customer]
 SELECT* FROM [dbo].[CustomerOrder]
 
+----Checkings customer names, city, order date with Pending order status 
 
-----To see customer names, city, order date with Pending order status 
+CREATE VIEW CustomersWithPendingOrder AS
 SELECT
 co.CustomerOrderStatus,
 co.CustomerOrderDate,
@@ -75,3 +72,5 @@ FROM CustomerOrder as co
 INNER JOIN Customer as c
 ON co.CustomerID = c.CustomerID
 WHERE co.CustomerOrderStatus = 'Pending';
+
+SELECT* FROM CustomersWithPendingOrde
