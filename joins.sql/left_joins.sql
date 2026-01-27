@@ -16,3 +16,19 @@ LEFT JOIN SupplierPrice AS sp
    AND p.SupplierID = sp.SupplierID;
 
    SELECT * FROM ProductSupplierPrices;
+
+
+-----checkung customer order shipping status
+   CREATE VIEW CustomerOrderShippingStatus AS
+SELECT 
+    c.CustomerID,
+    c.CustomerOrderID,
+    c.CustomerOrderStatus,
+    s.DeliveryStatus,
+    s.TrackingNumber,
+    s.CourierName
+FROM [dbo].[CustomerOrder] AS c
+LEFT JOIN [dbo].[CustomerShipping] AS s
+    ON c.CustomerOrderID = s.CustomerOrderID
+
+SELECT * FROM CustomerOrderShippingStatus; 
