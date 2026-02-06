@@ -1,3 +1,9 @@
+-----INNER JOIN
+--Only shows matches
+--Shows rows that exist in both tables
+--If there’s no match → it’s not shown
+
+
 USE [SandavTonerDB]
 
 ----selecting tables I will need to create my view
@@ -74,7 +80,8 @@ ON co.CustomerID = c.CustomerID
 WHERE co.CustomerOrderStatus = 'Pending';
 
 
------joining tables to see comapny order details 
+-- This query adds date details (weekend, weekday, holidays) to company orders for reporting.
+CREATE VIEW vw_CompanyOrders_WithDates AS
 SELECT TOP (1000) [CompanyOrderID]
       ,[CompanyID]
       ,[SupplierID]
@@ -85,8 +92,12 @@ SELECT TOP (1000) [CompanyOrderID]
       ,[Month_Number]
       ,[Order_Year]
       ,[Order_Day]
+      ,b.[Is_Weekend]
+      ,b.[Day_in_Week_Desc]
+      ,b.[Is_Public_Holiday]
   FROM [SandavTonerDB].[dbo].[CompanyOrder] AS a
-  INNER JOIN [SandavTonerDB].[dbo].[Dim_Date] AS b
+  Inner JOIN [SandavTonerDB].[dbo].[Dim_Date] AS b
   ON a.[Order_Year] = b.[Year] AND
+ a.[Month_Number] = b.[Month_in_Year]
  a.[Month_Number] = b.[Month_in_Year]
  

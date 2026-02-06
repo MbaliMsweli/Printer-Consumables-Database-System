@@ -1,3 +1,10 @@
+--FULL OUTER JOIN
+--Shows everything from both tables
+--Shows all rows from both tables
+--Matches where possible
+--No match → NULLs on the missing side
+
+
 -----Creating a View to check stock availability from all suppliers 
 USE [SandavTonerDB]
 
