@@ -74,7 +74,7 @@ ON co.CustomerID = c.CustomerID
 WHERE co.CustomerOrderStatus = 'Pending';
 
 
-
+-----joining tables to see comapny order details 
 SELECT TOP (1000) [CompanyOrderID]
       ,[CompanyID]
       ,[SupplierID]
