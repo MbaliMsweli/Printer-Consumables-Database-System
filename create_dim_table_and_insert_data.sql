@@ -1,17 +1,18 @@
-/* ================================
-   CHANGE DATE RANGE HERE
-   ================================ */
+
+----This code inserts dates into the Dim_Date table so dates are ready to use for reports.
+  
+  ---- CHANGE DATE RANGE HERE
 DECLARE @StartDate DATE = '2025-01-01';
 DECLARE @EndDate   DATE = '2025-12-31';
 
 
 /* ================================
-   CREATE TABLE
+   CREATE TABLE (RUNS ONCE)
    ================================ */
 IF NOT EXISTS (
-    SELECT 1 
-    FROM sys.objects 
-    WHERE name = 'Dim_Date' 
+    SELECT 1
+    FROM sys.objects
+    WHERE name = 'Dim_Date'
       AND type = 'U'
 )
 BEGIN
@@ -48,11 +49,11 @@ BEGIN
 
         Reporting_Date_Desc VARCHAR(12) NULL
     );
-END;   -- ✅ THIS WAS REQUIRED
+END;
 
 
 /* ================================
-   INSERT DATA (DYNAMIC)
+   INSERT ONLY MISSING DATES
    ================================ */
 ;WITH DateRange AS (
     SELECT @StartDate AS Actual_Date
@@ -87,52 +88,52 @@ INSERT INTO dbo.Dim_Date (
     Reporting_Date_Desc
 )
 SELECT
-    CAST(FORMAT(Actual_Date, 'yyyyMMdd') AS INT),
-    Actual_Date,
+    CAST(FORMAT(d.Actual_Date, 'yyyyMMdd') AS INT),
+    d.Actual_Date,
 
-    YEAR(Actual_Date) * 100 + MONTH(Actual_Date),
-    DATENAME(MONTH, Actual_Date) + ' ' + CAST(YEAR(Actual_Date) AS VARCHAR),
-    LEFT(DATENAME(MONTH, Actual_Date), 3) + ' ' + CAST(YEAR(Actual_Date) AS VARCHAR),
-    MONTH(Actual_Date),
+    YEAR(d.Actual_Date) * 100 + MONTH(d.Actual_Date),
+    DATENAME(MONTH, d.Actual_Date) + ' ' + CAST(YEAR(d.Actual_Date) AS VARCHAR),
+    LEFT(DATENAME(MONTH, d.Actual_Date), 3) + ' ' + CAST(YEAR(d.Actual_Date) AS VARCHAR),
+    MONTH(d.Actual_Date),
 
-    YEAR(Actual_Date) * 10 + DATEPART(QUARTER, Actual_Date),
-    'Q' + CAST(DATEPART(QUARTER, Actual_Date) AS VARCHAR) + ' ' + CAST(YEAR(Actual_Date) AS VARCHAR),
-    DATEPART(QUARTER, Actual_Date),
+    YEAR(d.Actual_Date) * 10 + DATEPART(QUARTER, d.Actual_Date),
+    'Q' + CAST(DATEPART(QUARTER, d.Actual_Date) AS VARCHAR) + ' ' + CAST(YEAR(d.Actual_Date) AS VARCHAR),
+    DATEPART(QUARTER, d.Actual_Date),
 
-    YEAR(Actual_Date),
+    YEAR(d.Actual_Date),
 
-    DATEPART(WEEK, Actual_Date),
-    DATEPART(DAYOFYEAR, Actual_Date),
-    DAY(Actual_Date),
-    DATEPART(WEEKDAY, Actual_Date),
-    DATENAME(WEEKDAY, Actual_Date),
+    DATEPART(WEEK, d.Actual_Date),
+    DATEPART(DAYOFYEAR, d.Actual_Date),
+    DAY(d.Actual_Date),
+    DATEPART(WEEKDAY, d.Actual_Date),
+    DATENAME(WEEKDAY, d.Actual_Date),
 
     CASE 
-        WHEN DATENAME(WEEKDAY, Actual_Date) IN ('Saturday','Sunday') THEN 1 
+        WHEN DATENAME(WEEKDAY, d.Actual_Date) IN ('Saturday','Sunday') THEN 1 
         ELSE 0 
     END,
 
-    YEAR(Actual_Date),
-    MONTH(Actual_Date),
-    DATEPART(QUARTER, Actual_Date),
+    YEAR(d.Actual_Date),
+    MONTH(d.Actual_Date),
+    DATEPART(QUARTER, d.Actual_Date),
 
     CASE 
-        WHEN DATENAME(WEEKDAY, Actual_Date) IN ('Saturday','Sunday') THEN 0 
+        WHEN DATENAME(WEEKDAY, d.Actual_Date) IN ('Saturday','Sunday') THEN 0 
         ELSE 1 
     END,
-    CASE 
-        WHEN Actual_Date = '2026-01-01' THEN 1 
-        ELSE 0 
-    END,
-    CASE 
-        WHEN Actual_Date = '2026-01-01' THEN 'New Year''s Day'
-        ELSE NULL
-    END,
+    0,        -- Is_Public_Holiday (default)
+    NULL,     -- Public_Holiday_Desc
 
-    FORMAT(Actual_Date, 'dd-MMM-yy')
+    FORMAT(d.Actual_Date, 'dd-MMM-yy')
 
-FROM DateRange
+FROM DateRange d
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM dbo.Dim_Date existing
+    WHERE existing.Actual_Date = d.Actual_Date
+)
 OPTION (MAXRECURSION 0);
+
 
 --SELECT *
 --FROM dbo.Dim_Date
