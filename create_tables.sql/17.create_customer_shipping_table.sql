@@ -1,6 +1,8 @@
 USE [SandavTonerDB]
 
-IF OBJECT_ID('CustomerShipping', 'U') IS NULL BEGIN CREATE TABLE CustomerShipping (
+IF OBJECT_ID('CustomerShipping', 'U') IS NULL BEGIN 
+
+CREATE TABLE CustomerShipping (
     CustomerShippingID INT IDENTITY(1, 1) PRIMARY KEY,
     CustomerOrderID INT NOT NULL,
     CustomerID INT NOT NULL,
@@ -13,3 +15,14 @@ IF OBJECT_ID('CustomerShipping', 'U') IS NULL BEGIN CREATE TABLE CustomerShippin
 );
 
 END
+
+---altered this table to add Load Date and Last run check date column
+ALTER TABLE [SandavTonerDB].[dbo].[CustomerShipping]
+ADD 
+    LoadDate DATETIME DEFAULT GETDATE(),
+    LastRunCheckDate DATETIME NULL;
+
+---This adds today’s date to rows that were missing a load date.
+UPDATE [SandavTonerDB].[dbo].[CustomerShipping]
+SET LoadDate = GETDATE()
+WHERE LoadDate IS NULL;

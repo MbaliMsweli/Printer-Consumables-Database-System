@@ -10,3 +10,14 @@ BEGIN
         CustomerOrderStatus VARCHAR(50)
     );
 END
+
+---altered this table to add Load Date and Last run check date column
+ALTER TABLE [SandavTonerDB].[dbo].[CustomerOrder]
+ADD 
+    LoadDate DATETIME DEFAULT GETDATE(),
+    LastRunCheckDate DATETIME NULL;
+
+---This adds today’s date to rows that were missing a load date.
+UPDATE [SandavTonerDB].[dbo].[CustomerOrder]
+SET LoadDate = GETDATE()
+WHERE LoadDate IS NULL;

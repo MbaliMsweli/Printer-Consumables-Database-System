@@ -83,3 +83,39 @@ FROM dbo.CompanyOrder;
 ---then updated the Order year to 2025 to match with a year in Dim table 
 UPDATE[SandavTonerDB].[dbo].[CompanyOrder]
 SET Order_Year = 2025
+
+
+----    Load Date
+----This shows when a specific row was inserted into the table.
+----Why it’s important:
+----Helps with auditing (when did this data arrive?)
+----Useful for debugging data issues
+--Lets you track data freshness
+
+--Simple example:
+--A customer order has LoadDate = 2026-02-06 → that’s when it entered the warehouse, not when the order was mad
+
+
+-------Last Run Check Column
+--This is used to remember the last time your ETL/job ran successfully.
+
+--Why it’s important:
+--It helps the system know where to continue from next time
+--Prevents loading the same data twice
+--Makes the process re-runnable (you can safely run it again without breaking things)
+
+--Simple example:
+--“Last run = 2026-02-01 10:00”
+--Next run will only load records newer than that tim
+
+---here im altering my tables to add load date column and last run checl column
+  ALTER TABLE [SandavTonerDB].[dbo].[Company]
+ADD 
+    LoadDate DATETIME DEFAULT GETDATE(),
+    LastRunCheckDate DATETIME NULL;
+
+    --  If the table already has data
+--You can populate LoadDate for old records like this:
+UPDATE [SandavTonerDB].[dbo].[CustomerOrderItem]
+SET LoadDate = GETDATE()
+WHERE LoadDate IS NULL;
