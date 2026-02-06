@@ -6,7 +6,7 @@ SELECT TOP (1000) [CompanyOrderID]
       ,[OrderStatus]
   FROM [SandavTonerDB].[dbo].[CompanyOrder]
 
----Spliting the date column in Company order table 
+---Spliting the Order date column from Company order table to have month name sepately, month number etc 
   SELECT 
  DATENAME (MONTH, OrderDate) AS Month_Nme,
  MONTH(OrderDate) AS Month_Number,
