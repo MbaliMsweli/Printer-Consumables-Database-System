@@ -56,3 +56,30 @@ inner join [SandavTonerDB].[dbo].[Dim_Date] as b
 on a. [Order_Year] = b.[Year] AND
 a.Order_Month_Number = b.[Month_in_Year] AND 
 a.[Order_Month_Actual] = b.[Month_in_Year_Desc];
+
+
+---WHEN I WAS RUNNING MY CODE I got an empty columns , the reason was that the order year on Company order table was 2026 
+--and the year on the Dim table table was 2025, so it didnt match
+
+SELECT TOP (1000) [CompanyOrderID]
+      ,[CompanyID]
+      ,[SupplierID]
+      ,[OrderDate]
+      ,[TotalAmount]
+      ,[OrderStatus]
+      ,[Month_Name]
+      ,[Month_Number]
+      ,[Order_Year]
+      ,[Order_Day]
+  FROM [SandavTonerDB].[dbo].[CompanyOrder] AS a
+  INNER JOIN [SandavTonerDB].[dbo].[Dim_Date] AS b
+  ON a.[Order_Year] = b.[Year] AND
+ a.[Month_Number] = b.[Month_in_Year]
+ 
+ ---so i had to check first the  order year and month number in comany order table 
+ SELECT DISTINCT Order_Year, Month_Number
+FROM dbo.CompanyOrder;
+
+---then updated the Order year to 2025 to match with a year in Dim table 
+UPDATE[SandavTonerDB].[dbo].[CompanyOrder]
+SET Order_Year = 2025

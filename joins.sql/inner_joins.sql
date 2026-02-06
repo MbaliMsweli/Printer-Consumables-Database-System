@@ -73,4 +73,20 @@ INNER JOIN Customer as c
 ON co.CustomerID = c.CustomerID
 WHERE co.CustomerOrderStatus = 'Pending';
 
-SELECT* FROM CustomersWithPendingOrder;
+
+
+SELECT TOP (1000) [CompanyOrderID]
+      ,[CompanyID]
+      ,[SupplierID]
+      ,[OrderDate]
+      ,[TotalAmount]
+      ,[OrderStatus]
+      ,[Month_Name]
+      ,[Month_Number]
+      ,[Order_Year]
+      ,[Order_Day]
+  FROM [SandavTonerDB].[dbo].[CompanyOrder] AS a
+  INNER JOIN [SandavTonerDB].[dbo].[Dim_Date] AS b
+  ON a.[Order_Year] = b.[Year] AND
+ a.[Month_Number] = b.[Month_in_Year]
+ 
