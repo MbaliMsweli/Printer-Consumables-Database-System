@@ -1,33 +1,34 @@
-SELECT TOP (1000) [CustomerOrderID]
-      ,[CustomerID]
-      ,[CustomerOrderDate]
-      ,[CustomerTotalAmount]
-      ,[CustomerOrderStatus]
-      ,[Order_Year]
-      ,[Order_Day]
-      ,[Order_Month_Actual]
-      ,[Order_Month_Number]
-  FROM [SandavTonerDB].[dbo].[CustomerOrder]
+SELECT TOP (1000) [CompanyOrderID]
+      ,[CompanyID]
+      ,[SupplierID]
+      ,[OrderDate]
+      ,[TotalAmount]
+      ,[OrderStatus]
+  FROM [SandavTonerDB].[dbo].[CompanyOrder]
 
-    SELECT
-    DATENAME(MONTH, CustomerOrderDate) AS MonthName, -- For display
-    MONTH(CustomerOrderDate) AS MonthNumber,
-    YEAR(CustomerOrderDate) AS Year,
-     DAY(CustomerOrderDate) AS DayNumber
-FROM
-    [SandavTonerDB].[dbo].[CustomerOrder]
+---Spliting the date column in Company order table 
+  SELECT 
+ DATENAME (MONTH, OrderDate) AS Month_Nme,
+ MONTH(OrderDate) AS Month_Number,
+ YEAR(OrderDate) as Order_Year,
+ DAY(OrderDate) AS Order_Day
 
---- was altering the table to add new columns 
-ALTER TABLE [SandavTonerDB].[dbo].[CustomerOrder]
-ADD Order_Month_Actual varchar,
-Order_Month_Number int
+ FROM [SandavTonerDB].[dbo].[CompanyOrder]
 
----I was updating the table and assigning values in the columns below 
-    UPDATE [SandavTonerDB].[dbo].[CustomerOrder]
-      SET Order_Year =  YEAR(CustomerOrderDate),
-      [Order_Day] = DAY(CustomerOrderDate),
-      [Order_Month_Actual]=  DATENAME(MONTH, CustomerOrderDate),
-      [Order_Month_Number]=  MONTH(CustomerOrderDate)
+ --adding new columns for splitted date 
+ ALTER TABLE [SandavTonerDB].[dbo].[CompanyOrder]
+ ADD Month_Name varchar (20),
+ Month_Number int,
+ Order_Year int,
+ Order_Day int
+
+ --- now upate the new added columns and assign values 
+
+ UPDATE [SandavTonerDB].[dbo].[CompanyOrder]
+ SET Month_Name = DATENAME (MONTH, OrderDate),
+ Month_Number = MONTH(OrderDate),
+  Order_Year = YEAR(OrderDate), 
+  Order_Day = DAY(OrderDate)
 
 ---I was altering the table and changing data type in the column Order_Month_Actual
 ALTER TABLE [SandavTonerDB].[dbo].[CustomerOrder]
