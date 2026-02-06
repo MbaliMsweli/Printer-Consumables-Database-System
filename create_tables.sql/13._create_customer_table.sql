@@ -24,3 +24,8 @@ ADD
 UPDATE [SandavTonerDB].[dbo].[Customer]
 SET LoadDate = GETDATE()
 WHERE LoadDate IS NULL;
+
+---This Updates the date and time of the last successful data load.
+UPDATE [SandavTonerDB].[dbo].[Customer]
+SET LastRunCheckDate = GETDATE();
+
