@@ -33,7 +33,9 @@ SELECT
     c.CustomerOrderStatus,
     s.DeliveryStatus,
     s.TrackingNumber,
-    s.CourierName
+    s.CourierName,
+    c.LoadDate,
+    c.LastRunCheckDate
 FROM [dbo].[CustomerOrder] AS c
 LEFT JOIN [dbo].[CustomerShipping] AS s
     ON c.CustomerOrderID = s.CustomerOrderID
