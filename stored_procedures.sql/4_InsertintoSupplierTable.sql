@@ -1,9 +1,10 @@
-CREATE OR ALTER PROCEDURE dbo.sp_InsertintoSupplierTable AS BEGIN
+CREATE OR ALTER PROCEDURE dbo.sp_InsertintoSupplierTable AS 
+
+BEGIN
 SET
     NOCOUNT ON;
 
-BEGIN 
-
+BEGIN
 INSERT INTO
     [SandavTonerDB].[dbo].[Supplier](
         SupplierName,
@@ -106,7 +107,7 @@ VALUES
         14
     );
 
-    END
+END
 END;
 
 EXEC dbo.sp_InsertintoSupplierTable;
