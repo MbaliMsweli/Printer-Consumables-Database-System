@@ -4,15 +4,20 @@ BEGIN
 SET
     NOCOUNT ON;
 BEGIN
-INSERT INTO
-    CompanyOrder (
-        CompanyID,
-        SupplierID,
-        OrderDate,
-        TotalAmount,
-        OrderStatus
-    )
-VALUES
+INSERT INTO CompanyOrder (
+    CompanyID,
+    SupplierID,
+    OrderDate,
+    TotalAmount,
+    OrderStatus
+)
+SELECT
+    o.CompanyID,
+    o.SupplierID,
+    o.OrderDate,
+    o.TotalAmount,
+    o.OrderStatus
+FROM (VALUES
     (1, 1, '2026-01-05', 3450, 'Delivered'),
     (1, 2, '2026-01-08', 3600, 'Delivered'),
     (1, 3, '2026-01-10', 2300, 'Delivered'),
@@ -22,7 +27,21 @@ VALUES
     (1, 7, '2026-01-22', 3300, 'Delivered'),
     (1, 8, '2026-01-22', 2400, 'Delivered'),
     (1, 9, '2026-01-18', 4100, 'Pending'),
-    (1, 10, '2026-01-21', 2700, 'Pending');
+    (1, 10, '2026-01-21', 2700, 'Pending')
+) AS o (
+    CompanyID,
+    SupplierID,
+    OrderDate,
+    TotalAmount,
+    OrderStatus
+)
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM CompanyOrder co
+    WHERE co.CompanyID = o.CompanyID
+      AND co.SupplierID = o.SupplierID
+      AND co.OrderDate = o.OrderDate
+);
 END
 END;
 

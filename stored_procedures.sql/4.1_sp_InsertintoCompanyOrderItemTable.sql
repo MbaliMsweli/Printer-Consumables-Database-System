@@ -4,9 +4,18 @@ BEGIN
 SET
     NOCOUNT ON;
 BEGIN
-INSERT INTO
-    CompanyOrderItem (CompanyOrderID, ProductID, Quantity, Price)
-VALUES
+INSERT INTO CompanyOrderItem (
+    CompanyOrderID,
+    ProductID,
+    Quantity,
+    Price
+)
+SELECT
+    i.CompanyOrderID,
+    i.ProductID,
+    i.Quantity,
+    i.Price
+FROM (VALUES
     (1, 1, 10, 345),
     (2, 2, 10, 360),
     (3, 3, 20, 115),
@@ -16,7 +25,19 @@ VALUES
     (7, 7, 10, 330),
     (8, 8, 20, 120),
     (9, 9, 10, 410),
-    (10, 10, 20, 135);
+    (10, 10, 20, 135)
+) AS i (
+    CompanyOrderID,
+    ProductID,
+    Quantity,
+    Price
+)
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM CompanyOrderItem coi
+    WHERE coi.CompanyOrderID = i.CompanyOrderID
+      AND coi.ProductID = i.ProductID
+);
 END
 END;
 
