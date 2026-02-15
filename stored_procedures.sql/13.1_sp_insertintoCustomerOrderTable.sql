@@ -1,4 +1,9 @@
+CREATE OR ALTER PROCEDURE dbo.sp_InsertintoCustomerOrderTable AS 
 
+BEGIN
+SET
+    NOCOUNT ON;
+BEGIN
 INSERT INTO CustomerOrder (
     CustomerID,
     CustomerOrderDate,
@@ -35,3 +40,7 @@ WHERE NOT EXISTS (
 );
 
 
+END
+END;
+
+EXEC dbo.sp_InsertintoCustomerOrderTable;

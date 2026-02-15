@@ -1,4 +1,9 @@
+CREATE OR ALTER PROCEDURE dbo.sp_InsertintoCustomerShippingTable AS 
 
+BEGIN
+SET
+    NOCOUNT ON;
+BEGIN
 INSERT INTO CustomerShipping (
     CustomerOrderID,
     CustomerID,
@@ -45,3 +50,7 @@ WHERE NOT EXISTS (
     WHERE cs.TrackingNumber = s.TrackingNumber
 );
 
+END
+END;
+
+EXEC dbo.sp_InsertintoCustomerShippingTable;

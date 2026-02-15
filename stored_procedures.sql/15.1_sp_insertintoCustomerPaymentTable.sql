@@ -1,4 +1,9 @@
+CREATE OR ALTER PROCEDURE dbo.sp_InsertintoCustomerPaymentTable AS 
 
+BEGIN
+SET
+    NOCOUNT ON;
+BEGIN
 INSERT INTO CustomerPayment (
     CustomerOrderID,
     CustomerID,
@@ -43,3 +48,7 @@ WHERE NOT EXISTS (
 );
 
 
+END
+END;
+
+EXEC dbo.sp_InsertintoCustomerPaymentTable;

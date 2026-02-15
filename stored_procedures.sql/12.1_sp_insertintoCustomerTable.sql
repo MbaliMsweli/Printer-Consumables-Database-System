@@ -1,4 +1,9 @@
+CREATE OR ALTER PROCEDURE dbo.sp_InsertintoCustomerTable AS 
 
+BEGIN
+SET
+    NOCOUNT ON;
+BEGIN
 INSERT INTO Customer (
     CustomerName,
     CustomerEmail,
@@ -41,3 +46,8 @@ WHERE NOT EXISTS (
     FROM Customer cu
     WHERE cu.CustomerEmail = c.CustomerEmail
 );
+
+END
+END;
+
+EXEC dbo.sp_InsertintoCustomerTable;

@@ -1,4 +1,9 @@
+CREATE OR ALTER PROCEDURE dbo.sp_InsertintoCustomerOrderItemTable AS 
 
+BEGIN
+SET
+    NOCOUNT ON;
+BEGIN
 INSERT INTO CustomerOrderItem (
     CustomerOrderID,
     ProductID,
@@ -34,3 +39,7 @@ WHERE NOT EXISTS (
       AND coi.ProductID = i.ProductID
 );
 
+END
+END;
+
+EXEC dbo.sp_InsertintoCustomerOrderItemTable;

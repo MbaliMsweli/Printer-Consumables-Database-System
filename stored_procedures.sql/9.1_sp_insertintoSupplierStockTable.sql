@@ -1,4 +1,9 @@
+CREATE OR ALTER PROCEDURE dbo.sp_InsertintoSupplierStockTable AS 
 
+BEGIN
+SET
+    NOCOUNT ON;
+BEGIN
 INSERT INTO SupplierStock (
     SupplierID,
     ProductID,
@@ -33,3 +38,7 @@ WHERE NOT EXISTS (
       AND ss.ProductID = s.ProductID
 );
 
+END
+END;
+
+EXEC dbo.sp_InsertintoSupplierStockTable;
