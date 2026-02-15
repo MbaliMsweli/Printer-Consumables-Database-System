@@ -1,5 +1,5 @@
 
-INSERT INTO CustomerOrder (
+INSERT INTO SandavTonerDB.dbo.CustomerOrder (
     CustomerID,
     CustomerOrderDate,
     CustomerTotalAmount,
@@ -29,7 +29,7 @@ FROM (VALUES
 )
 WHERE NOT EXISTS (
     SELECT 1
-    FROM CustomerOrder co
+    FROM SandavTonerDB.dbo.CustomerOrder co
     WHERE co.CustomerID = o.CustomerID
       AND co.CustomerOrderDate = o.CustomerOrderDate
 );

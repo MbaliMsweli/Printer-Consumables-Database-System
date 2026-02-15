@@ -1,4 +1,4 @@
-INSERT INTO Supplier (
+INSERT INTO SandavTonerDB.dbo.Supplier (
     SupplierName,
     SupplierEmail,
     SupplierPhone,
@@ -37,6 +37,6 @@ FROM (VALUES
 )
 WHERE NOT EXISTS (
     SELECT 1
-    FROM Supplier sup
+    FROM SandavTonerDB.dbo.Supplier sup
     WHERE sup.SupplierEmail = s.SupplierEmail
 );

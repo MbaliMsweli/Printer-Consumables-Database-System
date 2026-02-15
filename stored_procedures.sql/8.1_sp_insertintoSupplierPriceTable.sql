@@ -4,7 +4,7 @@ BEGIN
 SET
     NOCOUNT ON;
 BEGIN
-INSERT INTO SupplierPrice (
+INSERT INTO SandavTonerDB.dbo.SupplierPrice (
     SupplierID,
     ProductID,
     SupplierProductPrice,
@@ -32,7 +32,7 @@ FROM (VALUES
 )
 WHERE NOT EXISTS (
     SELECT 1
-    FROM SupplierPrice sp
+    FROM SandavTonerDB.dbo.SupplierPrice sp
     WHERE sp.SupplierID = SourceData.SupplierID
       AND sp.ProductID = SourceData.ProductID
 );

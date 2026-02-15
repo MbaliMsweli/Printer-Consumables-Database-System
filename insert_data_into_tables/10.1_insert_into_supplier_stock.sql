@@ -1,5 +1,5 @@
 
-INSERT INTO SupplierStock (
+INSERT INTO SandavTonerDB.dbo.SupplierStock (
     SupplierID,
     ProductID,
     SupplierQuantityAvailable,
@@ -28,7 +28,7 @@ FROM (VALUES
 )
 WHERE NOT EXISTS (
     SELECT 1
-    FROM SupplierStock ss
+    FROM SandavTonerDB.dbo.SupplierStock ss
     WHERE ss.SupplierID = s.SupplierID
       AND ss.ProductID = s.ProductID
 );

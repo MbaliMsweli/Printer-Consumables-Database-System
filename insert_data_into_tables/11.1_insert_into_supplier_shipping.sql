@@ -1,5 +1,5 @@
 
-INSERT INTO SupplierShipping (
+INSERT INTO SandavTonerDB.dbo.SupplierShipping (
     CompanyOrderID,
     SupplierID,
     SupplierDeliveryFee_1_5Units,
@@ -41,7 +41,7 @@ FROM (VALUES
 )
 WHERE NOT EXISTS (
     SELECT 1
-    FROM SupplierShipping ss
+    FROM SandavTonerDB.dbo.SupplierShipping ss
     WHERE ss.CompanyOrderID = s.CompanyOrderID
       AND ss.SupplierID = s.SupplierID
 );

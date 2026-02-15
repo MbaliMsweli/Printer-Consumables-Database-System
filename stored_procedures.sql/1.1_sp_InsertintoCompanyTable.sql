@@ -4,7 +4,7 @@ SET
 
 BEGIN 
 
-INSERT INTO Company (
+INSERT INTO SandavTonerDB.dbo.Company (
     CompanyName,
     CompanyEmail,
     CompanyPhone,
@@ -40,7 +40,7 @@ FROM (VALUES
 )
 WHERE NOT EXISTS (
     SELECT 1
-    FROM Company co
+    FROM SandavTonerDB.dbo.Company co
     WHERE co.CompanyEmail = c.CompanyEmail
 );
 

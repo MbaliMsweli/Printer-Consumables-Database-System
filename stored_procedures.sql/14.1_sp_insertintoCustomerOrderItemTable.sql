@@ -4,7 +4,7 @@ BEGIN
 SET
     NOCOUNT ON;
 BEGIN
-INSERT INTO CustomerOrderItem (
+INSERT INTO SandavTonerDB.dbo.CustomerOrderItem (
     CustomerOrderID,
     ProductID,
     Quantity,
@@ -34,7 +34,7 @@ FROM (VALUES
 )
 WHERE NOT EXISTS (
     SELECT 1
-    FROM CustomerOrderItem coi
+    FROM SandavTonerDB.dbo.CustomerOrderItem coi
     WHERE coi.CustomerOrderID = i.CustomerOrderID
       AND coi.ProductID = i.ProductID
 );

@@ -1,8 +1,8 @@
 USE [SandavTonerDB]
 
-IF OBJECT_ID('CompanyPrice', 'U') IS NULL
+IF OBJECT_ID('SandavTonerDB.dbo.CompanyPrice', 'U') IS NULL
 BEGIN
-    CREATE TABLE CompanyPrice (
+    CREATE TABLE SandavTonerDB.dbo.CompanyPrice (
         CompanyPriceID INT IDENTITY(1,1) PRIMARY KEY,
         SupplierID INT NOT NULL,
         ProductID INT NOT NULL,

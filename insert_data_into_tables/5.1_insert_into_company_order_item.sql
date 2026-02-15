@@ -1,4 +1,4 @@
-INSERT INTO CompanyOrderItem (
+INSERT INTO SandavTonerDB.dbo.CompanyOrderItem (
     CompanyOrderID,
     ProductID,
     Quantity,
@@ -28,7 +28,7 @@ FROM (VALUES
 )
 WHERE NOT EXISTS (
     SELECT 1
-    FROM CompanyOrderItem coi
+    FROM SandavTonerDB.dbo.CompanyOrderItem coi
     WHERE coi.CompanyOrderID = i.CompanyOrderID
       AND coi.ProductID = i.ProductID
 );

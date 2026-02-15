@@ -1,5 +1,5 @@
 
-INSERT INTO Product (
+INSERT INTO SandavTonerDB.dbo.Product (
     SupplierID,
     CompanyID,
     ProductName,
@@ -44,7 +44,7 @@ FROM (VALUES
 )
 WHERE NOT EXISTS (
     SELECT 1
-    FROM Product pr
+    FROM SandavTonerDB.dbo.Product pr
     WHERE pr.SupplierID = p.SupplierID
       AND pr.ProductName = p.ProductName
 );

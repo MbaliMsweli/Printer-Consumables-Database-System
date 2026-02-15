@@ -4,7 +4,7 @@ BEGIN
 SET
     NOCOUNT ON;
 BEGIN
-INSERT INTO Customer (
+INSERT INTO SandavTonerDB.dbo.Customer (
     CustomerName,
     CustomerEmail,
     CustomerPhone,
@@ -43,7 +43,7 @@ FROM (VALUES
 )
 WHERE NOT EXISTS (
     SELECT 1
-    FROM Customer cu
+    FROM SandavTonerDB.dbo.Customer cu
     WHERE cu.CustomerEmail = c.CustomerEmail
 );
 

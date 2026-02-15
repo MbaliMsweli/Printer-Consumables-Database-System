@@ -4,7 +4,7 @@ BEGIN
 SET
     NOCOUNT ON;
 BEGIN
-INSERT INTO CompanyOrder (
+INSERT INTO SandavTonerDB.dbo.CompanyOrder (
     CompanyID,
     SupplierID,
     OrderDate,
@@ -37,7 +37,7 @@ FROM (VALUES
 )
 WHERE NOT EXISTS (
     SELECT 1
-    FROM CompanyOrder co
+    FROM SandavTonerDB.dbo.CompanyOrder co
     WHERE co.CompanyID = o.CompanyID
       AND co.SupplierID = o.SupplierID
       AND co.OrderDate = o.OrderDate

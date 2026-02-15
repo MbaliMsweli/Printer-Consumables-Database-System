@@ -4,7 +4,7 @@ BEGIN
 SET
     NOCOUNT ON;
 BEGIN
-INSERT INTO CustomerShipping (
+INSERT INTO SandavTonerDB.dbo.CustomerShipping (
     CustomerOrderID,
     CustomerID,
     DeliveryFee_1_5Units,
@@ -46,7 +46,7 @@ FROM (VALUES
 )
 WHERE NOT EXISTS (
     SELECT 1
-    FROM CustomerShipping cs
+    FROM SandavTonerDB.dbo.CustomerShipping cs
     WHERE cs.TrackingNumber = s.TrackingNumber
 );
 

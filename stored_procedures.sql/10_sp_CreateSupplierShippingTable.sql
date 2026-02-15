@@ -3,9 +3,9 @@ CREATE OR ALTER PROCEDURE dbo.sp_SupplierShipping
 AS
 BEGIN    SET NOCOUNT ON;
 
-IF OBJECT_ID('SupplierShipping', 'U') IS NULL
+IF OBJECT_ID('SandavTonerDB.dbo.SupplierShipping', 'U') IS NULL
 BEGIN
-    CREATE TABLE SupplierShipping (
+    CREATE TABLE SandavTonerDB.dbo.SupplierShipping (
         SupplierShippingID INT IDENTITY(1,1) PRIMARY KEY,
         CompanyOrderID INT NOT NULL,
         SupplierID INT NOT NULL,

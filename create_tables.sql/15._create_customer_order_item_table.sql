@@ -1,8 +1,8 @@
 USE [SandavTonerDB]
 
-IF OBJECT_ID('CustomerOrderItem', 'U') IS NULL
+IF OBJECT_ID('SandavTonerDB.dbo.CustomerOrderItem', 'U') IS NULL
 BEGIN
-    CREATE TABLE CustomerOrderItem (
+    CREATE TABLE SandavTonerDB.dbo.CustomerOrderItem (
         CustomerOrderItemID INT IDENTITY(1,1),
         CustomerOrderID INT NOT NULL,
         ProductID INT NOT NULL,

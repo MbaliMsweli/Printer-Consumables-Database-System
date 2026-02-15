@@ -1,5 +1,5 @@
 
-INSERT INTO CustomerPayment (
+INSERT INTO SandavTonerDB.dbo.CustomerPayment (
     CustomerOrderID,
     CustomerID,
     CustomerPaymentMethod,
@@ -38,7 +38,7 @@ FROM (VALUES
 )
 WHERE NOT EXISTS (
     SELECT 1
-    FROM CustomerPayment cp
+    FROM SandavTonerDB.dbo.CustomerPayment cp
     WHERE cp.Reference = p.Reference
 );
 

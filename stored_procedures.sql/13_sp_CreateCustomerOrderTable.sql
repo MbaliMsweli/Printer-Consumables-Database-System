@@ -3,9 +3,9 @@ CREATE OR ALTER PROCEDURE dbo.sp_CustomerOrder
 AS
 BEGIN    SET NOCOUNT ON;
 
-IF OBJECT_ID('CustomerOrder', 'U') IS NULL
+IF OBJECT_ID('SandavTonerDB.dbo.CustomerOrder', 'U') IS NULL
 BEGIN
-    CREATE TABLE CustomerOrder (
+    CREATE TABLE SandavTonerDB.dbo.CustomerOrder (
         CustomerOrderID INT IDENTITY(1,1) PRIMARY KEY,
         CustomerID INT NOT NULL,
         CustomerOrderDate DATE,
