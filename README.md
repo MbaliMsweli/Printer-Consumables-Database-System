@@ -1,68 +1,280 @@
-# Data Modeling Project
+# Printer Consumables Database System (SQL Server)
+## Project Overview
 
-This project shows how data modeling is done from the beginning stage up to creating a real database using SQL. The example used is a toner and printer supplies business.
+In this project, I built a complete database system from scratch for a company that sells printer consumables such as toners and ink cartridges.
 
-The project helps to understand how to plan data, design tables, connect them properly, insert data, and use SQL joins to get useful information.
+The entire system was designed, developed, and tested using SQL Server Management Studio (SSMS). After testing and validating the SQL scripts, I pushed all code to GitHub for version control.
 
-## What is data modeling
+#### This workflow allowed me to:
 
-Data modeling is the process of deciding what data to store, how to store it, and how different data items relate to each other.
+Keep the project structured
 
-It helps to reduce duplicate data, avoid errors, improve performance, and make systems easier to manage and grow.
+Track changes using GitHub
 
-## Levels of data modeling
+Follow real-world database development best practices
 
-### There are three main levels of data modeling.
+Write clean, re-runnable SQL scripts
 
-# Conceptual data model
+This project reflects how databases are designed and implemented in real business environments.
 
-This is the business view of the system. It focuses on understanding what things exist in the business.
+## Step 1: Data Modeling (Planning Before Coding)
 
-Examples of things in this project are customers, suppliers, products, orders, payments, shipping, stock, and the company.
+Before writing any SQL code, I first designed the data model.
 
-At this stage, we only identify entities and their relationships. We do not worry about columns, data types, or SQL.
+This was my first time designing a complete data model, so while it may not be 100% perfect, it helped me understand how real databases are planned before implementation.
 
-This level is usually represented using an entity relationship diagram.
+#### The system was designed around the following entities:
 
-# Logical data model
+Suppliers
 
-Here we decide what tables to create, what columns each table will have, and how tables connect using primary keys and foreign keys.
+Companies
 
-Normalization is applied here to remove duplicate data and organize tables properly.
+Products
 
-Example tables are Customer, CustomerOrder, Product, Supplier, and Payment.
+Customers
 
-# Physical data model
+Orders
 
-At this stage we write SQL to create tables, define data types, add primary keys, foreign keys, and constraints.
+Payments
 
-This project uses SQL Server to create the physical database.
+Shipping
 
-## Normalization
+Stock
 
-Normalization is the process of organizing tables to avoid data problems.
+#### This step is important because:
 
-This project follows first normal form, second normal form, and third normal form.
+It reduces duplicate data
 
-First normal form means each column contains only one value.
+It makes relationships clear
 
-Second normal form means all columns depend on the whole primary key.
+It prevents structural problems later
 
-Third normal form means columns depend only on the primary key and not on other non-key columns.
+It acts as a blueprint before building the database
 
-This ensures customer information is stored only in the customer table, product information only in the product table, and order information only in the order table.
+Data modeling is like drawing a blueprint before building a house.
 
-# Project files explanation
+## Step 2: Creating the Database in SSMS
 
-The file named 1_create_database.sql it stores a code that creates the database.
+#### After completing the data model, I created the database named:
 
-The folder named create_tables.sql it stores a code that creates all tables such as customer, supplier, product, orders, prices, stock, payments, and shipping tables.
+SandavTonerDB
 
-The folder insert_data_into_tables contains SQL codes that insert data into all tables.
+The database creation script:
 
-The folder joins.sql contains SQL queries that use joins to combine data from multiple tables. These queries show customer orders, product sales, supplier prices, stock levels, pending orders etc.
+Checks if the database already exists
 
-The file Data Modelling Design.png shows the entity relationship diagram used during the conceptual and logical design stage.
+Creates it only if it does not exist
 
-### This project shows how to identify entities, design relationships, normalize tables, create SQL structures, insert data, and query data using joins.
+#### This ensures:
 
+The script is re-runnable
+
+It prevents errors if the database already exists
+
+It follows safe deployment practices
+
+Since the data is created and validated internally in this project, there was no need for a staging database. Data integrity is controlled using data types, keys, and constraints.
+
+## Step 3: Creating Tables with Re-runnable Scripts
+
+All tables were created using scripts that:
+
+First check if the table exists
+
+Only create the table if it does not exist
+
+For example, the CompanyOrderItem table:
+
+Has a Primary Key to uniquely identify each record
+
+Includes Foreign Keys to maintain relationships
+
+Uses correct data types
+
+Uses NOT NULL constraints where required
+
+Why This Approach Is Important
+
+#### This method:
+
+Prevents duplicate tables
+
+Maintains data integrity
+
+Supports re-runnable SQL scripts
+
+Follows real-world database best practices
+
+## Step 4: Creating a DIM Date Table
+
+I created a DIM Date table to centralize all date-related logic.
+
+#### This table stores:
+
+Date
+
+Month
+
+Year
+
+Quarter
+
+Weekday
+
+Weekend indicator
+
+Other calendar attributes
+
+Why a DIM Date Table Is Important
+
+Avoids recalculating date logic in every query
+
+Makes reporting easier
+
+Improves performance
+
+Keeps date logic consistent
+
+It allows analysis such as:
+
+Total sales per month
+
+Orders per year
+
+Payments per quarter
+
+Weekday vs weekend activity
+
+The DIM Date script is fully re-runnable, meaning it can be executed multiple times without creating duplicate data.
+
+## Step 5: Adding LoadDate and LastRunCheckDate
+
+I updated tables to include two important tracking columns:
+
+LoadDate → Shows when the data was first loaded
+
+LastRunCheckDate → Shows when the table was last updated or checked
+
+After adding these columns using ALTER TABLE, I populated them using UPDATE statements.
+
+### Why This Is Important
+
+##### This supports:
+
+Data freshness tracking
+
+Auditing
+
+Troubleshooting
+
+Future automation
+
+Monitoring data reliability
+
+Tracking load dates is a common real-world data engineering practice.
+
+## Step 6: Creating Joins and Views
+
+#### After inserting the data, I created different SQL joins:
+
+INNER JOIN
+
+LEFT JOIN
+
+FULL OUTER JOIN
+
+Joins allow data from multiple related tables to be combined into meaningful business insights.
+
+From these joins, I created views.
+
+### What a View Does
+
+#### A view:
+
+Saves complex join logic
+
+Simplifies reporting
+
+Allows reusable queries
+
+Makes data easier to access
+
+Views help present structured business insights without rewriting complex SQL.
+
+## Step 7: Creating Stored Procedures
+
+#### I created stored procedures to handle:
+
+Table creation
+
+Data insertion
+
+Updates
+
+A stored procedure is a saved SQL script that can be executed whenever needed.
+
+#### Benefits of Stored Procedures
+
+Avoid rewriting SQL code
+
+Make database operations repeatable
+
+Reduce human errors
+
+Centralize business logic
+
+Support automation
+
+Re-runnable & Duplicate-Safe Insert Logic
+
+#### One of the most important features of this project is that my insert logic:
+
+Prevents duplicate data from being inserted
+
+Ensures data warehouse tables do not contain repeated records
+
+Can be run multiple times safely
+
+#### This means:
+
+If the insert script is executed again, it will not duplicate existing records
+
+The database remains clean and reliable
+
+The system behaves like a production-ready data warehouse
+
+This is a critical best practice in real-world data engineering.
+
+### What I Learned
+
+Through this project, I learned how to:
+
+Design a structured relational database
+
+Apply normalization (1NF, 2NF, 3NF)
+
+Create safe, re-runnable SQL scripts
+
+Enforce data integrity using keys and constraints
+
+Track data loading using audit columns
+
+Combine tables using joins
+
+Simplify access using views
+
+Use stored procedures for automation
+
+Manage and version control SQL code using GitHub
+
+This project helped me move beyond writing basic queries and start thinking like a database developer and data engineer.
+
+# Tools Used
+
+Microsoft SQL Server
+
+SQL Server Management Studio (SSMS)
+
+draw io
+
+GitHub (Version Control)
